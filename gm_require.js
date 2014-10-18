@@ -76,6 +76,13 @@ var GM_define, GM_require;
     }
     // don't add the .js suffix if it was already specified
     var suffix = modulePathName.match(/\.js$/) ? '' : '.js'; // for now we always assume JavaScript
+    // query arguments
+    var query = modulePathName.match(/(\?[^?]+)$/gi);
+    if (query !== null)
+    {
+      modulePathName = modulePathName.replace(/(\?[^?]+)$/gi, '');
+      suffix += query;
+    }
     // if the baseUrl is http.* use it;
     // otherwise use the host/proto of the current page
     var baseHostProto = GM_require.configData.baseUrl.match(/^http/) ?
